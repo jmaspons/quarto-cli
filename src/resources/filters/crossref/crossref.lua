@@ -32,6 +32,8 @@ import("refs.lua")
 import("meta.lua")
 import("format.lua")
 import("options.lua")
+import("../normalize/flags.lua")
+import("../normalize/pandoc3.lua")
 import("../common/lunacolors.lua")
 import("../common/log.lua")
 import("../common/pandoc.lua")
@@ -55,10 +57,11 @@ import("../common/debug.lua")
 initCrossrefIndex()
 
 -- chain of filters
-return {
-  initCrossrefOptions(),
-  crossrefPreprocess(),
-  crossrefPreprocessTheorems(),
+  init_crossref_options(),
+  compute_flags(),
+  parse_pandoc3_figures(),
+  crossref_preprocess(),
+  crossref_preprocess_theorems(),
   combineFilters({
     fileMetadata(),
     qmd(),
